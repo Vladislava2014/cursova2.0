@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- Визначаємо мета-дані для кодування та налаштування вигляду сторінки -->
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<!-- Встановлюємо заголовок сторінки -->
+		<title>Mouse Drawing</title>
+		<style>
+			/* Стилі для канваса, щоб додати межу і визначити його вигляд */
+			#canvas {
+			    border: 1px solid black;
+			    display: block;
+			    margin-bottom: 10px;
+                background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAADNCAMAAAC8cX2UAAAAjVBMVEX///8AAAD8/Pz5+fnz8/Pr6+v29vbk5OR+fn7V1dXNzc3v7+/o6Oja2tqfn5+EhIS1tbWrq6uTk5O9vb00NDTGxsZUVFSmpqbY2Niampq7u7udnZ1mZmZMTEyRkZFtbW1DQ0N0dHQsLCwSEhI6OjpwcHAkJCRcXFwbGxtGRkYmJiYQEBAuLi43NzeJiYmwZEV2AAAWuklEQVR4nO1daXuyvBImAdkEZBERi3VtsbX1//+8kxnAlWVYbJ/3XL2/tJcKYchk9kwk6Q9/+MMf/vCHP/zhD3/4wx/+P8B/+wFKoGj23JjbY/Gv/NvP8iOQDWf1zs7YjJ4wLSMzDNwocl7iOH6JPDc055oy+ChEAHlhwu5wGA8+0OJ+jBy76SzZvEZuYFij/C1ww5uk68/Ddqa746dwHueSt8PhjzM98oLQDF0nZSwZehxpVkH2Ld7XqX47CYkx8KMg7DXce7Wwrj8UA2tDD+SKYaYr3RfcPdc0y9JsU/C8P1mlH58l9E/TJEk+8N90eNZ7gfs66t2nc8ZeBh9qz9hn5ZeKZpiu40+yCXbt/GOerb9w2CfhcNMJB1a/+Vg6ss2wIwkYrPll6uI38a2cG4klxxZDPogiJoCZj5/L0palQw4E4NJGjFbHr1wSk32wpPs58Mqfsis0cbtZmQrhKnvCbEsKqMY6zRhWqJBAXDiMquMZ061yu4lfsbn4Lx18OSEcMaJd/bUsvr6f6wxCHKZDWBKCSpCsr6X3soRwX/YfowTTmhtzKWbMuxczOZIh5kHcWYGFdhnEnrqFNFdfxTf75xinZp1U5kJrVX03Zuyj7+A8U6IsuPpMcHwah7bpruCbzXM8Bi69CYOk6lthxrmVl54Y6222BGAffFiSfKaOS+rH2VLYm8/wlOCOhs6OwGOlPxAvvHpUizG9+0MBU7tbQdohePguFY8EUu4Zwgxg+wd8q3754/M6ixht2x5jcxfG3rvSg+xQpSXbmbb0hJkGWRKtc156U6W7MTI1Mq/icRm/9rpyOVztgXc5q9D9Coj2p8BcZSQf9JAXFFvC5/Ff/cg1MvHp1fsBVmd7WYmBi9+qNedycL0Fr1r2vpDmz9e5VEzzYrW7cjtmnjBG/HITzkp2a5wmNDLaDi90wAll9Oj242s7RdxZ8NmgLM6l8WtG2umyfFR8EvadbCYTfZU5pG+aIPveIxKQUR7AtWu2bT24pIGRzybW3TfiNV80dAQ/mbe8d+2o0jhzqVamdFnOYGJ/xVcL1XbANziUkr1AOQuWsiBg0nJObHTffOVBXLksPpMtTPStzw6DzTbPLB+2c8ZXn4Hh+/GgLOa4+Ef3H+cGBrK33mpOBBMb4LqxlxJjnks2Kwg30II69FGPd0DuWQfSldbg4PS54OPdinLx0sVDfj4ubgvJBhEPZH/RBw9Bcxw8XkYNlyVZvOdVMNJgvcVoKg0SV+GSKQxw9n5vHizZser+4Gc9frdguX7BuXMoc8IleQHLZuvWmdhBIVBjCY2GSfONm6FuUI7df7wBcV3ubciSKibo/kFlWbXHeMGRpUL6WQRnQfbAIJsGDRaIHMPP9gZKt6TaH6BClrMw6fReVfKwdnly9VDtX4rV6AiHZFY/tHhBcgS6cU+wNcN4vrDzqz7ZvvmChrEVlKCTh3XFD4KjqmeAy4K2qPwr6RVWgFPnrSBUtE2WYQVL3cBj2a0lXOlO4+9rwbOpPpSYkhH7bmC8CAINZTdVhZ4Xl5Ysg6uBJcVH64doxYZsmdmrwRZ83n6SXEZdlJboYLE8G1lvWxF20sFPRsWjV16roBmU0k138RIP6SQB/lgrBPaoAFxoMjAwnDImCxoVEHKK/HAlhyjbGtdgjB5J2RNmRCd0PcRVKToW4jzoMdnisXDsY5nc4kJali/ca6ilwWGNnYNwUyF7Hl4pl0ZoDm7aKF/9TVwY6NvjLKoSKURoe1xbaqlAUUvNsDPkbBLfSrxu+wgBMAQ34BHv7z5C01sfPbrT1VAvtq7aj+wxK1XWOcxKHSFEvuCSBJeXMMLDa7NOyiJwF2NC/HJ8Y+LlM/3gbzTALbxsDgP0yT8E+SopF7YvNYZQJoHhP+Dnb++KWRX9+lVy0IJv15dmM32qsoIqcSoyIJx/1/NhE3C2k1IzWAJDqFrnZnLFuvx7XMWBYVl2iER51781Qarl0f3cxXvtkDyYQHgLAFHEavVAACy86lDfttJC4zmtOMfixbFbrG8ElSze3zofYlQQ3UH72GC1R/Zo8d4/K4B0++XfVTs5mPwqBv8Uyt2I00NB9Cy8V1gyLEVeOPNxmYXQCOEVXxLu/TMuZuEnPuJOFF0/A+eCgtkYNfZ7Hr/fMm/hLczHGAHYcvuC6Be54yOHQjscssQ6ya2rBc/mu9QYE2u3kmz0gTMdBtlNCHXtigBxyUVbFiLRkdxGZV09JdoXiSzZbhTKg8SKcb7LwpTHurTfGWqe1B0J6V31lvI6mKjz00KWb+iwIdC9KxGtaZP3dL6apa9eUp0KF/P7wT49CMp2e3CIVC1HXfikDqC+vx+fyCflzHX2PsVgcm3RkNk5z88ldIt7GaMVCEqf2qSkc2TMSKqqIL/Wvl531rSheKl7+ynlkFnu/FazcGFeuQ01ZhwmO3siC/R/NR+bnTJiwpLSqzVsfzjC+3wwc33heDa8ZPviAqZQt7GueEIuTTtlxIwtY18UydoJGAMSgvt2buWGJSXU1vQSLJsLfrGrxDmXgrbpOmAd/5lTjUNshDUg38nKlybXU3Dg6HzJjAmmqRb+DcHEEhhTYeg+baoBHBPS92KNf9VYvxxLesJsdrUQDN2Xr/LIGqKtTSqfWO84YTO4oPGOpzkXS/etannLIAgLzhU22MZnjfHhFgiFxzHTnl3PLqZ7xO6dDxnSfpXK27l23oKvPE4zDMagqxc/UsUPyYDtvSUkaPsyyoJhsn73RuzIG2ZyeJZZnvzQzgAZWPXOqsjK4d4eHe/FMUtGFb/L6O1ofN4BUpAze2hbtAb7kkisvRRP8XUKL+7Y2DwJ7/owYFnpGRCce89qr34OHAJjd8tTvPNgn3n323WapLPMAmf+c3gQUp+fFBdoQGBx8FvJF7Z/s5dgtwkeiAb/W9UuvjDv4lmDYDz8MNGI2VkV32NshJ7jOF5oPlRsZYBEP9tce7DtyFa9A+S4f2xFX4FbrPAt2qJIu2dR0iBZp6Q0ppS/HQVLZx+LDn8EHDRWByuYQ7x85xknNO25lUmDmUwVAMYbyzfX/MZkw/RssYCh7XXSim2Bv+eMTVEyTsJX8n6lBSiLyeCbfFohbNgyUA5exF/F5VAZDBMXkHI2NgQXt94vb1vkUGvT/sWb+TYJcGk+s5AkxCCaCkyUCAqFlmEXsT8w5l0203lQ+JD/d3acjLLkdwaMN7tYzaQ/1bekAvLapFDxDeLcQM8C7znHmuxYuVzyHWNTV/79ic6gwXS3fBT/nB4dX/KdDtg+WuCG/MrbhhvzICth1p+yMbIrVu2n27/kdouLYZmHuAfgZr8Hl8K3LEPoKtIvKaxSgAKqjC7c/vLMn68Xf+yz4GyF7YCRt5AWNC7385Do0+/qq1IkFXVX94Da09BQMAR5zmnvi+ADlt36Ft5veSE7Ziz9UQ+LDIO6wSXEHKSuCLLPKjosog1CTu+BaA4FuJfXOIIK5GE886GxBDXc/GRm4ZO5zmPWVBXWaXGLw2V1g0FH46UfBzdZbdllgSNsG5LBttw9JrkilpyrYpbXdR3zp+1x6QkoZWXNZJ/r9cxlyT6gsAhQcdhofe1Ff/faLPU8YLyh2Ql8zTf/QARmozy+pXPE4XSdRkBZ90seZhNUSsx7Q8mAC0Z37rhahbqXf7Nlik6QOz6lUIpDTim5/UR/Qi+JYWDcBIQrf9PU8IVjVvHWtcHC46rax98Fl6Zs10SSsD73JUv69jeTssTKR9222F+F07xJk4+P7D3j1nIiOM+2gz187w5egTMURhRGhNLA5SQy5dK6VY6p4BIdDWVdy3+TbGnPDk0/kfloiVbaUSunIS43e5D1/4nowiMc2q69ubPZV8VjrEp7TPtXhRo8WaMsz4uyq7ZXGNWNWz5qNs/8JsBA/SCuv0VFtxv5ne2M8nu4jXulfgcohIl133p5bY/wOA9VQWN5yNKH0rGxTh5DWO2CdQGtRxBmRMp5mUtyAoXKFVumnul+4i45RVFULrWKXHEIBjYv7iyyXqmEYQecV/Y5lPBXNLvoDXzNxiTvLrFPnHZK45PGh0FNGgUs8opAzbRZQXaEGM7bXmem2bvfIsGVkExImX3V/cqtij47g/bZuh3zwB5A15cRyVGaVJbbIwy2Lid7TI3PtoWVmVAr1xgrlmYEcbaZ5YsqSszmhlCQBanP72mVvJzSAnZtgTX7xyizCvLbm1iNQXR2LUoZ4KEhLmZVhqeCJ/gj+fbN14fbmrA9lLZ7rLEVAGwSnTU8uVIVOOOouoeebcgyfZcVyClT3G5LwbZBlAOLN/FpNdnPUN0JO1aFfITJSAoHQwFPfYKa853WZAKp1WFSY/BaWsiuVdkaUEHLVArZqybVaoWNoUC5JvT8zraEp6ACd4tX9jnLlj3F/gKvuGnXRKO9q9aQ/TpsKNFsKMUW6+1IuY8/QAfLUU2TWHvAzQHC/j/Wlt1w9AMo3eWi+kanJGh1XSS/ereWuLqZ3tjWx6AZa+4Aotauq4TxB+RymzUHqmg6LBigQ1dYl0OwB5Tls8aWXbgjplEYYTeAsC8PRrWEfQ7W6Q7kWUPQHispCE7ofIAmzHqtFJmUdl1rD9zi0yweCV6GhFHEshhBq8f5qJWK4TBtiDG/RHiBIxJBSv/WRWqtRQJ5gl59Fs7YkIQ0cR6r2ibT4dV6M7zR/iVCofmVRObq341t3yBDnH7NRApENG/OoSnM3n3Pq3vW5DCGaV2/p90moZWPvLNVHyaXBQ83JAH4IIt7TBJoMI2koOhXz5M7QvYuNfh6s/5eGO55oDwopVYBsO93pgHufG+AM4DdD3V0lNSST2ysvOyXsdEJHQtpFkQ9VIqFJtGLKFK27vwsuFGy2RRUByjOC2lNAsfUvsppnwaTQVmrtEes+5vlPk3RkrOsaaUx0UAOx0E2lKzbiVLwWI8ZRX2h2U4TI0lpaIQnUWPQBfrFJqSaO8EURk+ySSYadOMkJuwTtiu9Q8TeqkUi3Bn25Z5ou0Cs3s1kRjStHZA9jGqrxjuyk1ExmQpulVhQWXdXup22Bcyaoz6uoJPLhFYVZMM0hmKppJF5a1Er9uKEZ2C80bv+rcRK6sXleGhNM47kwuZN7S8tZ4q5xO9lCph9F/nVY6u9XVFfbyQmCfLaVrO3qCUbZtNyJ7ObU9Helzo0hGwze0Zfg2VCUP2YO6CWc9fP9hnqeKRptmaNKKbSA+S+BsuGIKs4GLBUK5hIdk/M2LrX9StCzATyq+SYvP4jZPv5KFetR1vVVCUU68tocQTEz5AdXhwj232ZnJywXSu8hLJqoxZFBD9Dtlwknq1z54sW7buxGqSZbL1FquNnyBbS5qNobcPY9jvbU0efbtJspy38+h8i+wUfCQ7r1LFCWw7TNrWZJLLXLUj5IbI1MMuh1uZSqOa2kEBvFJH2D5ItnulLLOv3y4GJ2LyLuhZ1ijOz/wfJxqYt+9u1tyYfF+hT0l//INmy5B+3Mb/dcGKQjUmPYpO3Y/LKEw5vca1m2xuoZUpalj7g2ALK5QHFA1u2IpuaoeLG6wwK/ab6QAcuYudjWi2uTfG301ZkN4f3YKpG/tXZ78kgPaU5dnwn/XQsXN3GAYl5IMSGMDCXDCjhPSR6HOvYTGk6UAWtTrUwdoQfblpUXW0I8R5VOECboAgU2NBCZksq9muESa0qmBE8dr/FzrNVk4iEqtPt7ZBQCjjMsdicWotL0WBtNo0njadSehChvg0lOjWFn+2QEItEQ8L7sVvsTUnruYxLk6QkerohVIgRwLO2uQRADqzBU+UcatLIZNdnG06lLiyfMqrKrYdJK87EgFHj+2nRAGRW1RkxGy0un1MsYe5Z4oQY0VQYhgcbyy4C+jmyyzpmVRfj8mxPdu7IEFs4acWSuAGvWXMfQHOTeHBdpw/V8l3bRbEvrVK/Hoxa6vBN4PKIXHf13bWwGhryDkI28SjQiKI0v6inRE87siqX3gc5HYJ8Vv2YkvSEDnYWZTI+SdX2ZYho6bh6EEVaXkzeZFmh5Ks8jfUah85VRDIboCjbpOdLLMI2LyyshubUTRO+WxNHfUSHE5nvgOYKuVYvIegwjluHNo258B6FSlDf3a+DEFZdkHOhGq3qFA+d9ni9JutRe8mPvTdEjFodeKZTajQ4nrDFDlHtjHdvl4FT1bNPlt+qf4Natwns/Fhc4tnR6pMaQ6z7fiXcbNbHQOVAx67NKvGo+glbiguTILIqeL2P7nX6aW6Zlsi8xpLmZAnbUttk8a91VLoO+xQ9Rz23HkQtPEUEdsqmrspxnFecTP28POyi1nifNgJOHybH/nwtS1pk7jGyxoOao1UR9FyeXOPK+ZCJNmwp/D4F8rj82r9z4N0Wj5w3j84xXU1iLzDnmtV901+3DtBSxmsGPM0M5porikzvF8P5nqa9LxgHkyl7QOedrbB/s7JNd/2DvMBBPJvAXvirtViAxw15/jhulWk/V/Yiflt+XZHd9gaXJ2hna5wxztpmrG/6pqxUsmwDsdbRTJKVkW0GwcKLeyT+om7njDpnWr9mb/pr5DlQ2LFVyAocDya1Wxb9SDcKXOvsd2IIp0ttITeD0NSs66CONmsVeMcOw0GfLslzYmzjARwmu+deqiukraQjznefAj9z3fVKWGK1zXeoAJcB7JA2ZGhwrNGsIr7ZDG51MrO4KlnvQ/XHSr7g5MVpKw+Yj9fsiKfAd4JYHt1emHeE1ThID3LlIGw97dh2Pxra3G+KJD+xETqYE+fCyXF2+HKxBafvqHCKEdSptXNK5LzG7al9BzPSFMP1Nx+ZgT9daIZpmkbvPh6CgBBu2F48aljNPx2otqIM9oNxd+lXlsbz1t0IEfny4pi8ah+M5KhMGB6f9yTC+TjIdkqUA86gbj/wy7LQ3acuiSV40+PM0cADHqgPwOmTlP1qZLqe57luEBq2ZY1GI2u+iBOc9/cOrMbXeXpHZt334JlZP8Sp13a1yapm2H26Rmjoz7+0J1t4FVNHk6HquKtkEmMucg8j9WiG+shw480y8wh2nUOgQCyH81wnbeebZ1YmxDn7dXkOL9XavmuMSuedK5bpxvrsrodiTzsTZF5hvZwpEA6PZoaLxSI0tHJPQ88GLyuYoAP28fjXTuXuaz1bTV7jyBXeluv4p7dlflrlGdNk4izCfZ8NrihUIVVTxEq4Fnp+wUdnbGd67M5vpyJm7KT7gxynpHnJO2vEPjl5gVaI0jVbdx4vF4tYKKgFzmbZMPJsEwVwLqakmJMhsodXUIyFrycfX4e7uT1MU/3VC+dnry9nyH3vdsN4EO5ut15NfMcNTYhXKSrnsjIe2YYZevEkvQntHD6P+Nd+kqkBA1tWtoer8kdLtkXR1OEZ+GirSVzGso4mJTK23Xi1viL+uWeONwLPeu+WtYXkCISNF+QEvaSZ0Wsy2/iLplMsng6cgkMStX/7HIqnvhyISP+jTffr4H7nfJc4RkvbhSvZlUN0jPphCMmqRcl5yZ0WZ/Olssvk+TsZMpEs/UdPjaHA9lZn2Z++BhiOLpdz3NCV4qvxMKV5v4VMA1vuJYuwS/ywvG5NlpdnQ9q4OenvPwzFcFZn6/U9iUOMDN/6a3zLlsgO8orWXPRfB8/oG4fOxd47FrRfYIn1sNbhzBFyqed/BqMwvuQMD2kcnNNPXDobHrTTEv9TAIIE7cnFY5tNXMNSsH3kMklXE3f8jx7j2A85Sbe0swP8nxt2XSJp/ymMw+jt+0x6336C/wnwYq+iai+c02Ry+kdPMfzDH/5z+B8iI/4Q6cDEOwAAAABJRU5ErkJggg==);
+                background-size: 800px;
+                background-repeat: no-repeat;
+			}
+
+			/* Стилі для кнопок, щоб зробити їх квадратними і зручними для натискання */
+			button {
+			    width: 50px;
+			    height: 50px;
+			    border: none;
+			    margin: 5px;
+			    cursor: pointer; /* Змінюємо курсор на руку при наведенні */
+			}
+
+			/* Стилі для кольорових кнопок */
+			.red {
+			    background-color: red;
+			}
+
+			.blue {
+			    background-color: blue;
+			}
+
+			.green {
+			    background-color: green;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- Канвас, на якому можна малювати за допомогою миші. Визначені події для малювання -->
+		<canvas
+			id="canvas"
+			width="800"
+			height="800"
+			onmousedown="startDrawing(event)"
+			onmousemove="draw(event)"
+			onmouseup="stopDrawing()"
+		>
+		</canvas>
+
+		<!-- onmousedown - Подія, коли кнопка миші натиснута  -->
+		<!-- onmousemove - Подія, коли миша рухається з натиснутою кнопкою -->
+		<!-- onmouseup - Подія, коли кнопка миші відпускається -->
+
+		<!-- Кнопки для вибору кольору малювання -->
+		<button class="red" onclick="changeColor('red')"></button>
+		<!-- Кнопка для червоного кольору -->
+		<button class="blue" onclick="changeColor('blue')"></button>
+		<!-- Кнопка для синього кольору -->
+		<button class="green" onclick="changeColor('green')"></button>
+		<!-- Кнопка для зеленого кольору -->
+
+		<script>
+			// Отримуємо доступ до елементів канваса і контексту для малювання
+			let canvas = document.getElementById("canvas");
+			let ctx = canvas.getContext("2d");
+			let isDrawing = false; // Статус малювання: чи активне малювання
+			let currentColor = "black"; // Початковий колір малювання
+
+			// Функція для початку малювання
+			function startDrawing(event) {
+				isDrawing = true; // Включаємо малювання
+				let x = event.offsetX; // Отримуємо координати миші по осі X
+				let y = event.offsetY; // Отримуємо координати миші по осі Y
+
+				// Налаштовуємо стиль малювання
+				ctx.lineWidth = 5; // Ширина лінії
+				ctx.lineJoin = "round"; // Закруглення ліній
+				ctx.lineCap = "round"; // Закруглення кінців лінії
+				ctx.strokeStyle = currentColor; // Колір лінії
+				ctx.fillStyle = currentColor; // Колір заливки (якщо потрібно)
+
+				ctx.beginPath(); // Починаємо малювати
+				ctx.moveTo(x, y); // Переміщаємо точку початку лінії до позиції миші
+			}
+
+			// Функція для малювання
+			function draw(event) {
+				if (!isDrawing) return; // Якщо малювання не активне, не малюємо
+				let x = event.offsetX; // Отримуємо координати миші по осі X
+				let y = event.offsetY; // Отримуємо координати миші по осі Y
+				ctx.lineTo(x, y); // Малюємо лінію до нових координат
+				ctx.stroke(); // Застосовуємо лінію на канвас
+			}
+
+			// Функція для завершення малювання
+			function stopDrawing() {
+				isDrawing = false; // Вимикаємо малювання
+			}
+
+			// Функція для зміни кольору малювання
+			function changeColor(color) {
+				currentColor = color; // Оновлюємо поточний колір
+			}
+		</script>
+	</body>
+</html>

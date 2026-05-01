@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- Визначаємо мета-дані для кодування та налаштування вигляду сторінки -->
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<!-- Встановлюємо заголовок сторінки -->
+		<title>lhee</title>
+		<style>
+			/* Стилі для канваса, щоб додати межу і визначити його вигляд */
+			#canvas {
+			    border: 1px solid black;
+			    display: block;
+			    margin-bottom: 10px;
+                background-image: url(roze.png);
+                background-repeat: no-repeat;
+                background-size: 500px;
+			}
+
+			/* Стилі для кнопок, щоб зробити їх квадратними і зручними для натискання */
+			button {
+			    width: 50px;
+			    height: 50px;
+			    border: none;
+			    margin: 5px;
+			    cursor: pointer; /* Змінюємо курсор на руку при наведенні */
+			}
+
+			/* Стилі для кольорових кнопок */
+			.red {
+			    background-color: red;
+			}
+
+			.blue {
+			    background-color: blue;
+			}
+
+			.green {
+			    background-color: green;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- Канвас, на якому можна малювати за допомогою миші. Визначені події для малювання -->
+		<canvas
+			id="canvas"
+			width="800"
+			height="600"
+			onmousedown="startDrawing(event)"
+			onmousemove="draw(event)"
+			onmouseup="stopDrawing()"
+		>
+		</canvas>
+
+		<!-- onmousedown - Подія, коли кнопка миші натиснута  -->
+		<!-- onmousemove - Подія, коли миша рухається з натиснутою кнопкою -->
+		<!-- onmouseup - Подія, коли кнопка миші відпускається -->
+
+		<!-- Кнопки для вибору кольору малювання -->
+		<button class="red" onclick="changeColor('red')"></button>
+		<!-- Кнопка для червоного кольору -->
+		<button class="blue" onclick="changeColor('blue')"></button>
+		<!-- Кнопка для синього кольору -->
+		<button class="green" onclick="changeColor('green')"></button>
+		<!-- Кнопка для зеленого кольору -->
+
+		<script>
+			// Отримуємо доступ до елементів канваса і контексту для малювання
+			let canvas = document.getElementById("canvas");
+			let ctx = canvas.getContext("2d");
+			let isDrawing = false; // Статус малювання: чи активне малювання
+			let currentColor = "black"; // Початковий колір малювання
+
+			// Функція для початку малювання
+			function startDrawing(event) {
+				isDrawing = true; // Включаємо малювання
+				let x = event.offsetX; // Отримуємо координати миші по осі X
+				let y = event.offsetY; // Отримуємо координати миші по осі Y
+
+				// Налаштовуємо стиль малювання
+				ctx.lineWidth = 5; // Ширина лінії
+				ctx.lineJoin = "round"; // Закруглення ліній
+				ctx.lineCap = "round"; // Закруглення кінців лінії
+				ctx.strokeStyle = currentColor; // Колір лінії
+				ctx.fillStyle = currentColor; // Колір заливки (якщо потрібно)
+
+				ctx.beginPath(); // Починаємо малювати
+				ctx.moveTo(x, y); // Переміщаємо точку початку лінії до позиції миші
+			}
+
+			// Функція для малювання
+			function draw(event) {
+				if (!isDrawing) return; // Якщо малювання не активне, не малюємо
+				let x = event.offsetX; // Отримуємо координати миші по осі X
+				let y = event.offsetY; // Отримуємо координати миші по осі Y
+				ctx.lineTo(x, y); // Малюємо лінію до нових координат
+				ctx.stroke(); // Застосовуємо лінію на канвас
+			}
+
+			// Функція для завершення малювання
+			function stopDrawing() {
+				isDrawing = false; // Вимикаємо малювання
+			}
+
+			// Функція для зміни кольору малювання
+			function changeColor(color) {
+				currentColor = color; // Оновлюємо поточний колір
+			}
+		</script>
+	</body>
+</html>
