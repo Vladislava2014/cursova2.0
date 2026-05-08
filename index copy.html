@@ -5,16 +5,16 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<!-- Встановлюємо заголовок сторінки -->
-		<title>lhee</title>
+		<title>Mouse Drawing</title>
 		<style>
 			/* Стилі для канваса, щоб додати межу і визначити його вигляд */
 			#canvas {
 			    border: 1px solid black;
 			    display: block;
 			    margin-bottom: 10px;
-                background-image: url(roze.png);
-                background-repeat: no-repeat;
-                background-size: 500px;
+                background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLcsijMY2Abg3RJYfKEYlQQ_CnKCWtNXSeag&s);
+                background-size: 800px;
+				background-repeat: no-repeat;
 			}
 
 			/* Стилі для кнопок, щоб зробити їх квадратними і зручними для натискання */
@@ -54,11 +54,12 @@
 		<canvas
 			id="canvas"
 			width="800"
-			height="600"
+			height="800"
 			onmousedown="startDrawing(event)"
 			onmousemove="draw(event)"
 			onmouseup="stopDrawing()"
 		>
+
 		</canvas>
 
 		<!-- onmousedown - Подія, коли кнопка миші натиснута  -->
